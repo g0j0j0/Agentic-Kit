@@ -21,11 +21,18 @@ find . -type f -name '*.tmpl' | sed 's#^\./##' | while read -r f; do
   echo "create $rel"
 done
 
-# 2. Propagate agents and skills (incl. this one) so the new repo can scaffold others.
+# 2. Propagate agents and skills, except this kit-only skill.
 if [ "$SRC_CLAUDE" != "$TARGET/.claude" ]; then
   mkdir -p "$TARGET/.claude"
-  cp -Rn "$SRC_CLAUDE/agents" "$SRC_CLAUDE/skills" "$TARGET/.claude/"
-  echo "copy   .claude/agents .claude/skills"
+  cp -Rn "$SRC_CLAUDE/agents" "$TARGET/.claude/"
+  echo "copy   .claude/agents"
+  for s in "$SRC_CLAUDE"/skills/*/; do
+    s="$(basename "$s")"
+    [ "$s" = "init-project" ] && continue
+    mkdir -p "$TARGET/.claude/skills"
+    cp -Rn "$SRC_CLAUDE/skills/$s" "$TARGET/.claude/skills/"
+    echo "copy   .claude/skills/$s"
+  done
 fi
 
 # 3. Initialize git.
