@@ -1,0 +1,14 @@
+# Guides
+
+## Workflow
+1. Open a session: context, agents and skills load automatically.
+2. Make a change.
+3. Run the `doc-keeper` agent (or update `docs/` and `MEMORY.md` manually).
+
+## Use /init-project from any repo
+```bash
+ln -s "$PWD/.claude/skills/init-project" ~/.claude/skills/init-project
+```
+
+## Add an agent or skill
+Create the file, then list it in `docs/agents/` or `docs/skills/`.
