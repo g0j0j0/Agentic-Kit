@@ -21,14 +21,15 @@ find . -type f -name '*.tmpl' | sed 's#^\./##' | while read -r f; do
   echo "create $rel"
 done
 
-# 2. Propagate agents and skills, except this kit-only skill.
+# 2. Propagate agents and skills, except kit-only skills.
+KIT_ONLY_SKILLS=" init-project ansible-bootstrap "
 if [ "$SRC_CLAUDE" != "$TARGET/.claude" ]; then
   mkdir -p "$TARGET/.claude"
   cp -Rn "$SRC_CLAUDE/agents" "$TARGET/.claude/"
   echo "copy   .claude/agents"
   for s in "$SRC_CLAUDE"/skills/*/; do
     s="$(basename "$s")"
-    [ "$s" = "init-project" ] && continue
+    case "$KIT_ONLY_SKILLS" in *" $s "*) continue ;; esac
     mkdir -p "$TARGET/.claude/skills"
     cp -Rn "$SRC_CLAUDE/skills/$s" "$TARGET/.claude/skills/"
     echo "copy   .claude/skills/$s"

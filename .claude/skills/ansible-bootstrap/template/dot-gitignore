@@ -1,0 +1,5 @@
+collections/
+*.retry
+.vault_pass*
+# Encrypt vault.yml before committing; never commit it in plaintext.
+.ansible/

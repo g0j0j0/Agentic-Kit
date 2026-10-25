@@ -1,0 +1,5 @@
+---
+# Copy to vault.yml, set values, then encrypt:
+#   ansible-vault encrypt inventories/production/group_vars/all/vault.yml
+# Generate the hash with: mkpasswd -m sha-512   (package: whois / mkpasswd)
+vault_admin_password_hash: "$6$replace-me"

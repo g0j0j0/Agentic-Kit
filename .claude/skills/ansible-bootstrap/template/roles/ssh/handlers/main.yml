@@ -1,0 +1,14 @@
+---
+# Reload, not restart: keeps the current Ansible session alive.
+- name: Reload sshd
+  ansible.builtin.service:
+    name: "{{ ssh_service }}"
+    state: reloaded
+
+# Socket-activated sshd (Ubuntu 22.10+). KillMode=process on ssh.service,
+# so open sessions survive the socket restart.
+- name: Move ssh.socket to ssh_port
+  ansible.builtin.systemd_service:
+    name: ssh.socket
+    state: restarted
+    daemon_reload: true

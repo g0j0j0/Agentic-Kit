@@ -1,0 +1,69 @@
+---
+- name: Load OS family variables
+  ansible.builtin.include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Assert the admin account is fully defined
+  ansible.builtin.assert:
+    that:
+      - admin_user | length > 0
+      - admin_authorized_keys | length > 0
+      - admin_sudo_nopasswd or (admin_password_hash is defined and admin_password_hash is match('^\$'))
+    fail_msg: >-
+      Set admin_user, at least one admin_authorized_keys entry and, unless
+      admin_sudo_nopasswd is true, vault_admin_password_hash (a crypt hash).
+
+# Check mode creates nothing, so later tasks must skip accounts that don't exist yet.
+- name: Look up existing accounts
+  ansible.builtin.getent:
+    database: passwd
+
+- name: Look up existing groups
+  ansible.builtin.getent:
+    database: group
+
+- name: Create SSH access group
+  ansible.builtin.group:
+    name: "{{ ssh_allow_group }}"
+    system: true
+
+- name: Create admin user
+  ansible.builtin.user:
+    name: "{{ admin_user }}"
+    shell: /bin/bash
+    groups: ["{{ users_sudo_group }}", "{{ ssh_allow_group }}"]
+    append: true
+    password: "{{ omit if admin_sudo_nopasswd else admin_password_hash }}"
+    update_password: always
+
+- name: Install admin SSH public keys (exclusive)
+  ansible.posix.authorized_key:
+    user: "{{ admin_user }}"
+    key: "{{ admin_authorized_keys | join('\n') }}"
+    exclusive: true
+    manage_dir: true
+  when: not ansible_check_mode or admin_user in ansible_facts['getent_passwd']
+
+- name: Allow passwordless sudo for admin user
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/90-{{ admin_user }}"
+    content: "{{ admin_user }} ALL=(ALL:ALL) NOPASSWD: ALL\n"
+    owner: root
+    group: root
+    mode: "0440"
+    validate: /usr/sbin/visudo -cf %s
+  when: admin_sudo_nopasswd
+
+- name: Remove passwordless sudo when disabled
+  ansible.builtin.file:
+    path: "/etc/sudoers.d/90-{{ admin_user }}"
+    state: absent
+  when: not admin_sudo_nopasswd
+
+- name: Lock down admin home directory
+  ansible.builtin.file:
+    path: "/home/{{ admin_user }}"
+    state: directory
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0750"
+  when: not ansible_check_mode or admin_user in ansible_facts['getent_passwd']

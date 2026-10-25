@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: your-name
+  description: "Hardened sshd: key-only auth, no root login, restricted users, strict file permissions."
+  license: MIT
+  min_ansible_version: "2.15"
+  platforms:
+    - name: Debian
+      versions: [bookworm]
+    - name: Ubuntu
+      versions: [jammy, noble, resolute]
+    - name: EL
+      versions: ["9"]
+dependencies: []

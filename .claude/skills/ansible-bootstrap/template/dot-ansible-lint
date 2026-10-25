@@ -1,0 +1,9 @@
+---
+profile: production
+# Use the collections from requirements.yml in ./collections; don't install a second copy into .ansible/.
+offline: true
+exclude_paths:
+  - collections/
+  - .ansible/
+  # Encrypted with ansible-vault: not YAML until decrypted.
+  - inventories/*/group_vars/*/vault.yml

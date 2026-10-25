@@ -1,0 +1,4 @@
+---
+common_packages: [sudo, curl, ca-certificates, chrony, dnf-automatic, policycoreutils-python-utils]
+common_remove_packages: [telnet, rsh, rsh-server]
+common_chrony_service: chronyd
