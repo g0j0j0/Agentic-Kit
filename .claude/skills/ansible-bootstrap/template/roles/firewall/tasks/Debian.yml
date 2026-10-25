@@ -1,0 +1,37 @@
+---
+- name: Install ufw
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+  register: firewall_ufw_install
+
+# Check mode: a package that is only about to be installed has no binary yet.
+# Rules first, default-deny last, so SSH is never blocked mid-run.
+- name: Configure ufw
+  when: not (ansible_check_mode and firewall_ufw_install is changed)
+  block:
+    - name: Rate-limit SSH
+      community.general.ufw:
+        rule: limit
+        port: "{{ ssh_port | string }}"
+        proto: tcp
+        comment: ssh
+
+    - name: Allow extra inbound ports
+      community.general.ufw:
+        rule: allow
+        port: "{{ item.port | string }}"
+        proto: "{{ item.proto | default('tcp') }}"
+      loop: "{{ firewall_allowed_ports }}"
+
+    - name: Allow outgoing traffic by default
+      community.general.ufw:
+        direction: outgoing
+        default: allow
+
+    - name: Deny incoming traffic by default and enable ufw
+      community.general.ufw:
+        direction: incoming
+        default: deny
+        state: enabled
+        logging: "low"

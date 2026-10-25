@@ -1,0 +1,12 @@
+---
+# Order matters: the admin user must exist before SSH is hardened,
+# and SSH must be allowed before the firewall goes default-deny.
+- name: Bootstrap and harden servers
+  hosts: all
+  become: true
+  roles:
+    - role: common
+    - role: users
+    - role: ssh
+    - role: firewall
+    - role: fail2ban

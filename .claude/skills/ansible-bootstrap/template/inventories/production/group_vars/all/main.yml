@@ -1,0 +1,20 @@
+---
+# Admin account created on every host. Only public keys belong here.
+admin_user: deploy
+admin_authorized_keys:
+  - "ssh-ed25519 AAAA... replace-me@example"
+# Password hash for sudo, from vault.yml (mkpasswd -m sha-512).
+admin_password_hash: "{{ vault_admin_password_hash }}"
+# true skips the sudo password prompt: only for automation-only hosts.
+admin_sudo_nopasswd: false
+
+# SSH. If you change the port, also set ansible_port for later runs.
+ssh_port: 22
+ssh_allow_group: sshusers
+
+# Extra inbound ports; SSH is always allowed.
+firewall_allowed_ports: []
+# - { port: 80, proto: tcp }
+# - { port: 443, proto: tcp }
+
+common_timezone: UTC

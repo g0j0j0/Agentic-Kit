@@ -5,6 +5,7 @@
 ## Quick start
 - Open a Claude Code session here: `CLAUDE.md`, `MEMORY.md`, agents and skills load automatically.
 - Scaffold a new repo: `/init-project ~/Projects/my-app [my-app]`
+- Scaffold a hardened Ansible project: `/ansible-bootstrap ~/Projects/infra`
 
 ## Structure
 ```

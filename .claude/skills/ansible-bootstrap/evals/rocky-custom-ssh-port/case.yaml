@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: rocky-custom-ssh-port
+expected_outcome: |
+  An Ansible project in ops/ for db1 with ssh_port 2222, firewalld allowing 2222/tcp, SELinux port labeling for 2222, and guidance to set ansible_port for later runs.

@@ -1,0 +1,43 @@
+---
+- name: Install firewalld
+  ansible.builtin.dnf:
+    name: firewalld
+    state: present
+  register: firewall_firewalld_install
+
+# Check mode: a package that is only about to be installed has no service yet.
+- name: Configure firewalld
+  when: not (ansible_check_mode and firewall_firewalld_install is changed)
+  block:
+    - name: Enable firewalld
+      ansible.builtin.service:
+        name: firewalld
+        enabled: true
+        state: started
+
+    # The public zone rejects anything not listed below.
+    - name: Allow SSH port
+      ansible.posix.firewalld:
+        zone: public
+        port: "{{ ssh_port }}/tcp"
+        permanent: true
+        immediate: true
+        state: enabled
+
+    - name: Allow extra inbound ports
+      ansible.posix.firewalld:
+        zone: public
+        port: "{{ item.port }}/{{ item.proto | default('tcp') }}"
+        permanent: true
+        immediate: true
+        state: enabled
+      loop: "{{ firewall_allowed_ports }}"
+
+    # Cockpit is a web admin console, not needed on a hardened server.
+    - name: Remove cockpit from the public zone
+      ansible.posix.firewalld:
+        zone: public
+        service: cockpit
+        permanent: true
+        immediate: true
+        state: disabled

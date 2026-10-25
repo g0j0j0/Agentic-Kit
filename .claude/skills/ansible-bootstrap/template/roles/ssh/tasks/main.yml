@@ -1,0 +1,87 @@
+---
+- name: Load OS family variables
+  ansible.builtin.include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+# Guard against lockout: password and root login are about to be disabled.
+- name: Assert an admin key exists before disabling password login
+  ansible.builtin.assert:
+    that: admin_authorized_keys | length > 0
+    fail_msg: admin_authorized_keys is empty; refusing to disable password authentication.
+
+- name: Ensure sshd reads drop-in configs first
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    line: Include /etc/ssh/sshd_config.d/*.conf
+    insertbefore: BOF
+    owner: root
+    group: root
+    mode: "0600"
+    validate: /usr/sbin/sshd -t -f %s
+  notify: Reload sshd
+
+- name: Create sshd drop-in directory
+  ansible.builtin.file:
+    path: /etc/ssh/sshd_config.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+# sshd keeps the first value it reads, so 00- wins over e.g. 50-cloud-init.conf.
+- name: Deploy hardened sshd config
+  ansible.builtin.template:
+    src: 00-hardening.conf.j2
+    dest: /etc/ssh/sshd_config.d/00-hardening.conf
+    owner: root
+    group: root
+    mode: "0600"
+    validate: /usr/sbin/sshd -t -f %s
+  notify: Reload sshd
+
+- name: Allow non-default SSH port in SELinux (RedHat)
+  community.general.seport:
+    ports: "{{ ssh_port }}"
+    proto: tcp
+    setype: ssh_port_t
+    state: present
+  when:
+    - ansible_facts['os_family'] == 'RedHat'
+    - ssh_port | int != 22
+    - ansible_facts['selinux']['status'] | default('disabled') == 'enabled'
+
+# Ubuntu 22.10+ listens through ssh.socket: a generator turns Port into ListenStream
+# at daemon-reload, so reloading sshd alone never moves the port. Reported as a
+# change when the socket listens elsewhere; the handler applies it at play end.
+# Raw systemctl output: the module's status dict keeps only one of several Listen= lines.
+- name: Check ssh.socket listens on ssh_port (Debian)  # noqa: command-instead-of-module
+  ansible.builtin.command: systemctl show ssh.socket --property=UnitFileState --property=Listen
+  register: ssh_socket
+  changed_when:
+    - "'UnitFileState=enabled' in ssh_socket.stdout"
+    - "(':' ~ ssh_port ~ ' (Stream)') not in ssh_socket.stdout"
+  failed_when: false
+  check_mode: false
+  when: ansible_facts['os_family'] == 'Debian'
+  notify: Move ssh.socket to ssh_port
+
+- name: Find SSH host private keys
+  ansible.builtin.find:
+    paths: /etc/ssh
+    patterns: ssh_host_*_key
+  register: ssh_host_keys
+
+# o-rwx only: RHEL may legitimately use group ssh_keys with 0640.
+- name: Ensure host private keys are not world-accessible
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: root
+    mode: o-rwx
+  loop: "{{ ssh_host_keys.files }}"
+  loop_control:
+    label: "{{ item.path }}"
+
+- name: Ensure sshd is enabled and running
+  ansible.builtin.service:
+    name: "{{ ssh_service }}"
+    enabled: true
+    state: started

@@ -1,0 +1,80 @@
+---
+- name: Assert the OS family is supported
+  ansible.builtin.assert:
+    that: ansible_facts['os_family'] in ['Debian', 'RedHat']
+    fail_msg: "Unsupported OS family: {{ ansible_facts['os_family'] }} (expected Debian or RedHat)"
+
+- name: Load OS family variables
+  ansible.builtin.include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Install base packages (Debian)
+  ansible.builtin.apt:
+    name: "{{ common_packages + common_extra_packages }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  register: common_apt
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Install base packages (RedHat)
+  ansible.builtin.dnf:
+    name: "{{ common_packages + common_extra_packages }}"
+    state: present
+  register: common_dnf
+  when: ansible_facts['os_family'] == 'RedHat'
+
+- name: Remove legacy cleartext clients and servers
+  ansible.builtin.package:
+    name: "{{ common_remove_packages }}"
+    state: absent
+
+- name: Configure unattended security upgrades (Debian)
+  ansible.builtin.template:
+    src: 20auto-upgrades.j2
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: "0644"
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Restrict dnf-automatic to security updates and apply them (RedHat)
+  community.general.ini_file:
+    path: /etc/dnf/automatic.conf
+    section: commands
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    mode: "0644"
+  loop:
+    - { option: upgrade_type, value: security }
+    - { option: apply_updates, value: "yes" }
+  when: ansible_facts['os_family'] == 'RedHat'
+
+# Check mode: a package that is only about to be installed has no service yet.
+- name: Enable dnf-automatic timer (RedHat)
+  ansible.builtin.systemd_service:
+    name: dnf-automatic.timer
+    enabled: true
+    state: started
+  when:
+    - ansible_facts['os_family'] == 'RedHat'
+    - not (ansible_check_mode and common_dnf is changed)
+
+- name: Set timezone
+  community.general.timezone:
+    name: "{{ common_timezone }}"
+
+- name: Enable time sync
+  ansible.builtin.service:
+    name: "{{ common_chrony_service }}"
+    enabled: true
+    state: started
+  when: not (ansible_check_mode and (common_apt is changed or common_dnf is changed))
+
+- name: Apply kernel hardening settings
+  ansible.posix.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_file: /etc/sysctl.d/90-hardening.conf
+    state: present
+    reload: true
+  loop: "{{ common_sysctl | dict2items }}"

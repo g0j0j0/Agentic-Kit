@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: ubuntu-vps-web
+expected_outcome: |
+  An Ansible project in infra/ with both hosts in the inventory, admin_user alice with the given public key, ports 80 and 443 allowed, hardened SSH and default-deny firewall, and no secrets in plaintext.

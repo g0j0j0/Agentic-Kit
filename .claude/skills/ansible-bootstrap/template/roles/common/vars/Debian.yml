@@ -1,0 +1,4 @@
+---
+common_packages: [sudo, curl, ca-certificates, chrony, unattended-upgrades, apt-listchanges]
+common_remove_packages: [telnet, rsh-client, rsh-server]
+common_chrony_service: chrony
