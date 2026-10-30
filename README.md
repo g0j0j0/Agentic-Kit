@@ -24,4 +24,4 @@ docs/assets/       # Diagrams and media
 | Agents | [docs/agents](docs/agents/README.md) |
 | Skills | [docs/skills](docs/skills/README.md) |
 | Guides | [docs/guides](docs/guides/README.md) |
-| Changelog | [docs/changelog.md](docs/changelog.md) |
+| Changelog | [docs/CHANGELOG.md](docs/CHANGELOG.md) |

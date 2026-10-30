@@ -11,4 +11,4 @@
 ## Rules
 - Code, comments and docs in English only.
 - After each change, update `docs/` and `MEMORY.md` (or delegate to the `doc-keeper` agent).
-- Keep `MEMORY.md` short: newest first, one line per entry, archive to `docs/changelog.md`.
+- Keep `MEMORY.md` short: newest first, one line per entry, archive to `docs/CHANGELOG.md`.
