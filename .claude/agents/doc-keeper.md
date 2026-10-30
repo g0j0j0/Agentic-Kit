@@ -10,6 +10,6 @@ You keep documentation and memory in sync with the code.
 1. Inspect the change (`git diff HEAD` or the summary you were given).
 2. Update the matching page in `docs/<topic>/README.md`; put new diagrams in `docs/assets/` and link them.
 3. Add one line at the top of `MEMORY.md` > Recent changes: `- YYYY-MM-DD [type] summary (files)`.
-4. If Recent changes exceeds 30 entries, move the oldest to `docs/changelog.md`.
+4. If Recent changes exceeds 30 entries, move the oldest to `docs/CHANGELOG.md`.
 5. Update `MEMORY.md` > Current state and Decisions only if they changed.
 Be terse. English only. Do not touch code.
