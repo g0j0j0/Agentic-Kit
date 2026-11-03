@@ -11,9 +11,10 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 
 ## Decisions
 - Template is the single source of truth for generated repos: `.claude/skills/init-project/template/`. Kit root docs add kit-only content (`/init-project`).
-- Kit-only skills (`init-project`, `ansible-bootstrap`) are listed in `KIT_ONLY_SKILLS` in init-project.sh and never copied to generated repos.
+- Kit-only skills (`init-project`, `ansible-bootstrap`) and agents (`ansible-expert`) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos.
 
 ## Recent changes
+- 2026-11-03 [feat] ansible-expert agent (sonnet, preloads /ansible-bootstrap, uv tooling), kit-only via KIT_ONLY_AGENTS (.claude/agents/ansible-expert.md, init-project.sh, docs/agents, docs/skills)
 - 2026-10-30 [docs] Renamed docs/changelog.md to docs/CHANGELOG.md (kit + init-project template)
 - 2026-10-26 [fix] ansible-bootstrap: check mode skips tasks needing pending packages (common, firewall, fail2ban); convention + troubleshooting row in SKILL.md
 - 2026-10-26 [fix] ansible-bootstrap users role: check mode skips tasks for accounts/groups not created yet (template/roles/users/tasks/main.yml)
