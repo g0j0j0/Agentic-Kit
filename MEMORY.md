@@ -14,6 +14,7 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 - Kit-only skills (`init-project`, `ansible-bootstrap`) and agents (`ansible-expert`) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos.
 
 ## Recent changes
+- 2026-11-04 [docs] Guide: install ansible-expert + /ansible-bootstrap at user level via symlinks (docs/guides/README.md)
 - 2026-11-03 [feat] ansible-expert agent (sonnet, preloads /ansible-bootstrap, uv tooling), kit-only via KIT_ONLY_AGENTS (.claude/agents/ansible-expert.md, init-project.sh, docs/agents, docs/skills)
 - 2026-10-30 [docs] Renamed docs/changelog.md to docs/CHANGELOG.md (kit + init-project template)
 - 2026-10-26 [fix] ansible-bootstrap: check mode skips tasks needing pending packages (common, firewall, fail2ban); convention + troubleshooting row in SKILL.md
