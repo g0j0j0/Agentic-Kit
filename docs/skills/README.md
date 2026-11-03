@@ -7,6 +7,8 @@ Skills live in `.claude/skills/<name>/SKILL.md` and are invoked as `/<name>`.
 | `init-project` | `/init-project <dir> [name]` | Scaffolds a repo with this structure. Template: `.claude/skills/init-project/template/` (`*.tmpl`, `dot-` → `.`). Kit-only: not copied into generated repos. |
 | `ansible-bootstrap` | `/ansible-bootstrap <dir>` | Scaffolds a hardened Ansible project (Debian/Ubuntu + RHEL 9): `common`, `users`, `ssh`, `firewall`, `fail2ban` roles, vault, lint config. Template: `.claude/skills/ansible-bootstrap/template/` (`dot-` → `.`, never overwrites). Kit-only. |
 
+`ansible-bootstrap` is preloaded by the `ansible-expert` agent (`skills:` frontmatter).
+
 Kit-only skills are listed in `KIT_ONLY_SKILLS` in `.claude/skills/init-project/scripts/init-project.sh`.
 
 ## `/ansible-bootstrap`
