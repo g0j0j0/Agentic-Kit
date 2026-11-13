@@ -11,6 +11,10 @@ Subagents live in `.claude/agents/<name>.md` (frontmatter: `name`, `description`
 | `qa-reviewer` | Read-only check of an implementation against its Acceptance criteria, with tools matched to the repo type. |
 | `security-reviewer` | Read-only security audit (misconfigurations, secrets, encryption, CIS/ISO references) matched to the technologies used. |
 
+Subagents cannot answer permission prompts. Pre-allow the commands Specialists and reviewers need (for example `git`, `uvx`, `yamllint`) in `.claude/settings.json` under `permissions.allow`, or their work is blocked.
+
+The `manager` records User stories with `docs/agents/issue-tracker.md`, created per repo by `/setup-matt-pocock-skills`. Without it, the manager asks the Requester where to record them.
+
 Kit-only agents are listed in `KIT_ONLY_AGENTS` in `.claude/skills/init-project/scripts/init-project.sh` and not copied to generated repos.
 
 To use a kit-only agent in another repo, install it at user level: see [Guides](../guides/README.md#use-ansible-expert-and-ansible-bootstrap-from-any-repo).
