@@ -28,6 +28,26 @@ _Avoid_: Command, macro
 A delegated subagent defined in `.claude/agents/`. An Agent may preload Skills.
 _Avoid_: Bot, worker
 
+**Requester**:
+Whoever asks for a change: a client, customer or developer.
+_Avoid_: User, stakeholder
+
+**User story**:
+One outcome requested by a Requester, recorded as an issue.
+_Avoid_: Requirement, ticket
+
+**Acceptance criteria**:
+The checkable conditions that make a User story done.
+_Avoid_: Definition of done, checklist
+
+**Spec**:
+The set of User stories and their Acceptance criteria handed to an Agent.
+_Avoid_: Brief, requirements doc
+
+**Specialist**:
+An Agent that implements a Spec in one technology domain, such as `ansible-expert` or `devops-engineer`.
+_Avoid_: Implementer, worker
+
 **Memory**:
 `MEMORY.md`: the short, newest-first record of current state and recent changes.
 _Avoid_: Notes, log

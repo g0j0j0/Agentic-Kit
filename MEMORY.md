@@ -14,6 +14,7 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 - Kit-only skills (`init-project`, `ansible-bootstrap`) and agents (`ansible-expert`) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos.
 
 ## Recent changes
+- 2026-11-13 [feat] Workflow agents: manager (main-thread, `claude --agent manager`), devops-engineer, qa-reviewer, security-reviewer; propagated to generated repos (.claude/agents/, docs/agents, init-project template docs, GLOSSARY.md)
 - 2026-11-13 [docs] Added GLOSSARY.md (Kit, Template, Generated repo, Kit-only, Skill, Agent, Memory, Changelog, Agent skills config)
 - 2026-11-13 [docs] /setup-matt-pocock-skills config: GitHub issues, default triage labels, single-context domain docs (CLAUDE.md, docs/agents/)
 - 2026-11-04 [docs] Guide: install ansible-expert + /ansible-bootstrap at user level via symlinks (docs/guides/README.md)

@@ -6,6 +6,10 @@ Subagents live in `.claude/agents/<name>.md` (frontmatter: `name`, `description`
 |---|---|
 | `doc-keeper` | Syncs `docs/` and `MEMORY.md` after each change. |
 | `ansible-expert` | Writes, reviews and tests Ansible (FQCN, idempotence, role layout, `requirements.yml`, yamllint/ansible-lint, syntax-check, Molecule). Model `sonnet`; tools `Read, Edit, Write, Glob, Grep, Bash`. Preloads the `ansible-bootstrap` skill for new projects. Tooling via `uv`. Kit-only. |
+| `manager` | Gathers a Requester's needs, writes User stories and Acceptance criteria, delegates to Specialists, then QA and security review. Run with `claude --agent manager` (subagents cannot spawn subagents). Model `opus`. |
+| `devops-engineer` | Specialist for Kubernetes, network policies, Terraform/OpenTofu, GitOps, CI/CD and git. Validates and plans only. |
+| `qa-reviewer` | Read-only check of an implementation against its Acceptance criteria, with tools matched to the repo type. |
+| `security-reviewer` | Read-only security audit (misconfigurations, secrets, encryption, CIS/ISO references) matched to the technologies used. |
 
 Kit-only agents are listed in `KIT_ONLY_AGENTS` in `.claude/skills/init-project/scripts/init-project.sh` and not copied to generated repos.
 
