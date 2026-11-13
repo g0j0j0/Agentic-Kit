@@ -9,3 +9,7 @@ Subagents live in `.claude/agents/<name>.md` (frontmatter: `name`, `description`
 | `devops-engineer` | Specialist for Kubernetes, network policies, Terraform/OpenTofu, GitOps, CI/CD and git. Validates and plans only. |
 | `qa-reviewer` | Read-only check of an implementation against its Acceptance criteria, with tools matched to the repo type. |
 | `security-reviewer` | Read-only security audit (misconfigurations, secrets, encryption, CIS/ISO references) matched to the technologies used. |
+
+Subagents cannot answer permission prompts. Pre-allow the commands Specialists and reviewers need (for example `git`, `uvx`, `yamllint`) in `.claude/settings.json` under `permissions.allow`, or their work is blocked.
+
+The `manager` records User stories with `docs/agents/issue-tracker.md`, created per repo by `/setup-matt-pocock-skills`. Without it, the manager asks the Requester where to record them.
