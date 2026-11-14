@@ -5,6 +5,8 @@ set -euo pipefail
 
 SKILL_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 TARGET="${1:?Usage: ansible-bootstrap.sh <target-dir>}"
+# The skill passes the path quoted, so the shell never expands a leading "~".
+case "$TARGET" in "~") TARGET="$HOME" ;; "~/"*) TARGET="$HOME/${TARGET#"~/"}" ;; esac
 mkdir -p "$TARGET" && TARGET="$(cd -P "$TARGET" && pwd -P)"
 
 # Copy template: map "dot-x" to ".x", never overwrite.

@@ -7,13 +7,13 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 ## Current state
 - Status: v0.1 skeleton ready
 - Next: add domain agents/skills as needed
-- Next: /ansible-bootstrap: SKILL.md quotes "$0" so `~` is not expanded
 
 ## Decisions
 - Template is the single source of truth for generated repos: `.claude/skills/init-project/template/`. Kit root docs add kit-only content (`/init-project`).
 - Kit-only skills (`init-project`, `ansible-bootstrap`) and agents (`ansible-expert`) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos.
 
 ## Recent changes
+- 2026-11-14 [fix] ansible-bootstrap.sh expands a leading `~` in the target path (skill passes it quoted) (.claude/skills/ansible-bootstrap/scripts/ansible-bootstrap.sh)
 - 2026-11-14 [fix] qa-reviewer: fixed severity rule for not-verifiable criteria (blocking only if an available tool was not run) (.claude/agents/qa-reviewer.md)
 - 2026-11-14 [fix] manager asks the Requester when issue-tracker.md is missing; documented subagent permission pre-allow (.claude/agents/manager.md, docs/agents, init-project template docs)
 - 2026-11-13 [feat] Workflow agents: manager (main-thread, `claude --agent manager`), devops-engineer, qa-reviewer, security-reviewer; propagated to generated repos (.claude/agents/, docs/agents, init-project template docs, GLOSSARY.md)
