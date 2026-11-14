@@ -13,6 +13,7 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 - Kit-only skills (`init-project`, `ansible-bootstrap`) and agents (`ansible-expert`) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos.
 
 ## Recent changes
+- 2026-11-14 [feat] kubernetes-engineer specialist (manifests, Helm, Kustomize, network policies, GitOps with FluxCD/ArgoCD); devops-engineer keeps Terraform, CI/CD, git (.claude/agents/, docs/agents, init-project template docs)
 - 2026-11-14 [fix] ansible-bootstrap.sh expands a leading `~` in the target path (skill passes it quoted) (.claude/skills/ansible-bootstrap/scripts/ansible-bootstrap.sh)
 - 2026-11-14 [fix] qa-reviewer: fixed severity rule for not-verifiable criteria (blocking only if an available tool was not run) (.claude/agents/qa-reviewer.md)
 - 2026-11-14 [fix] manager asks the Requester when issue-tracker.md is missing; documented subagent permission pre-allow (.claude/agents/manager.md, docs/agents, init-project template docs)
