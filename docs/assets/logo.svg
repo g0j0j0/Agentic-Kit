@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="t d">
+  <title id="t">Agentic-Kit logo</title>
+  <desc id="d">A chibi manga calico cat sticker wearing a pastel hard hat and hi-vis vest, sitting with its paws on a hammer.</desc>
+  <defs>
+    <!-- sticker: white border (with a faint grey rim) around the whole drawing -->
+    <filter id="sticker" x="-10%" y="-10%" width="120%" height="120%">
+      <feMorphology in="SourceAlpha" operator="dilate" radius="20" result="rim"/>
+      <feFlood flood-color="#cfc6dc"/><feComposite in2="rim" operator="in" result="rimColor"/>
+      <feMorphology in="SourceAlpha" operator="dilate" radius="16" result="wide"/>
+      <feFlood flood-color="#ffffff"/><feComposite in2="wide" operator="in" result="white"/>
+      <feMerge><feMergeNode in="rimColor"/><feMergeNode in="white"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="head"><ellipse cx="256" cy="222" rx="150" ry="118"/></clipPath>
+    <clipPath id="body"><ellipse cx="256" cy="380" rx="100" ry="82"/></clipPath>
+    <linearGradient id="iris" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4b2e83"/><stop offset=".6" stop-color="#7a52b8"/><stop offset="1" stop-color="#6aa9d8"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#sticker)" stroke-linejoin="round" stroke-linecap="round">
+
+    <!-- tail with pastel stripes -->
+    <path d="M352 420 C420 424 458 380 436 326" fill="none" stroke="#7a5a5a" stroke-width="44"/>
+    <path d="M352 420 C420 424 458 380 436 326" fill="none" stroke="#fbd7ad" stroke-width="36"/>
+    <path d="M352 420 C420 424 458 380 436 326" fill="none" stroke="#b9dcee" stroke-width="36" stroke-dasharray="22 70" stroke-dashoffset="-6"/>
+    <path d="M352 420 C420 424 458 380 436 326" fill="none" stroke="#d5c3ec" stroke-width="36" stroke-dasharray="18 74" stroke-dashoffset="-44"/>
+    <ellipse cx="436" cy="320" rx="26" ry="30" fill="#fff6ec" stroke="#7a5a5a" stroke-width="4"/>
+
+    <!-- body -->
+    <ellipse cx="256" cy="380" rx="100" ry="82" fill="#fff6ec"/>
+    <!-- hi-vis vest -->
+    <g clip-path="url(#body)">
+      <rect x="150" y="334" width="212" height="140" fill="#ffc48a"/>
+      <rect x="150" y="372" width="212" height="13" fill="#fff6ec"/>
+      <rect x="150" y="406" width="212" height="13" fill="#fff6ec"/>
+      <rect x="250" y="334" width="12" height="140" fill="#f4a261"/>
+    </g>
+    <ellipse cx="256" cy="380" rx="100" ry="82" fill="none" stroke="#7a5a5a" stroke-width="4"/>
+
+    <!-- hind feet with paw pads -->
+    <ellipse cx="170" cy="432" rx="52" ry="38" fill="#e4d5f3" stroke="#7a5a5a" stroke-width="4"/>
+    <ellipse cx="342" cy="432" rx="52" ry="38" fill="#fff6ec" stroke="#7a5a5a" stroke-width="4"/>
+    <g fill="#f7a8b8">
+      <ellipse cx="170" cy="442" rx="17" ry="13"/><circle cx="148" cy="418" r="7"/><circle cx="165" cy="408" r="7"/><circle cx="183" cy="408" r="7"/><circle cx="198" cy="418" r="7"/>
+      <ellipse cx="342" cy="442" rx="17" ry="13"/><circle cx="320" cy="418" r="7"/><circle cx="337" cy="408" r="7"/><circle cx="355" cy="408" r="7"/><circle cx="370" cy="418" r="7"/>
+    </g>
+
+    <!-- hammer held like the cup in the reference -->
+    <rect x="246" y="384" width="20" height="74" rx="9" fill="#e0a868" stroke="#7a5a5a" stroke-width="4"/>
+    <rect x="204" y="346" width="104" height="40" rx="12" fill="#c3cfdf" stroke="#7a5a5a" stroke-width="4"/>
+    <rect x="214" y="354" width="84" height="8" rx="4" fill="#e8eef6"/>
+    <!-- paws -->
+    <circle cx="228" cy="398" r="21" fill="#fff6ec" stroke="#7a5a5a" stroke-width="4"/>
+    <circle cx="284" cy="398" r="21" fill="#fff6ec" stroke="#7a5a5a" stroke-width="4"/>
+    <g fill="none" stroke="#f1b9c4" stroke-width="3"><path d="M222 392 v8 M232 392 v8"/><path d="M278 392 v8 M288 392 v8"/></g>
+
+    <!-- ears -->
+    <polygon points="148,182 128,58 250,118" fill="#fbd7ad" stroke="#7a5a5a" stroke-width="4"/>
+    <polygon points="364,182 384,58 262,118" fill="#b9dcee" stroke="#7a5a5a" stroke-width="4"/>
+    <polygon points="156,164 142,82 224,126" fill="#f7a8b8"/>
+    <polygon points="356,164 370,82 288,126" fill="#f7a8b8"/>
+    <path d="M150 150 q8 -26 22 -34 q-2 18 6 26 q-14 -2 -28 8z M362 150 q-8 -26 -22 -34 q2 18 -6 26 q14 -2 28 8z" fill="#fff9f2"/>
+
+    <!-- head: cream base, peach left, sky right -->
+    <ellipse cx="256" cy="222" rx="150" ry="118" fill="#fff6ec"/>
+    <g clip-path="url(#head)">
+      <ellipse cx="150" cy="140" rx="104" ry="92" fill="#fbd7ad"/>
+      <ellipse cx="362" cy="140" rx="104" ry="92" fill="#b9dcee"/>
+      <ellipse cx="150" cy="168" rx="12" ry="20" fill="#d5c3ec"/>
+      <ellipse cx="362" cy="168" rx="12" ry="20" fill="#d5c3ec"/>
+      <ellipse cx="190" cy="200" rx="8" ry="6" fill="#fff6ec"/>
+      <ellipse cx="324" cy="196" rx="8" ry="6" fill="#fff6ec"/>
+    </g>
+    <ellipse cx="256" cy="222" rx="150" ry="118" fill="none" stroke="#7a5a5a" stroke-width="4"/>
+
+    <!-- hard hat -->
+    <path d="M194 130 Q194 62 256 62 Q318 62 318 130 Z" fill="#ffe27a" stroke="#7a5a5a" stroke-width="4"/>
+    <rect x="245" y="60" width="22" height="72" rx="8" fill="#ffd24a" stroke="#7a5a5a" stroke-width="4"/>
+    <rect x="172" y="122" width="168" height="22" rx="11" fill="#ffe27a" stroke="#7a5a5a" stroke-width="4"/>
+    <path d="M208 108 Q212 86 230 76" fill="none" stroke="#fff7c9" stroke-width="7"/>
+
+    <!-- eyes: glossy gradient irises -->
+    <g>
+      <ellipse cx="190" cy="240" rx="40" ry="46" fill="#fbf7ff" stroke="#2a1b3d" stroke-width="5"/>
+      <ellipse cx="194" cy="244" rx="31" ry="37" fill="url(#iris)"/>
+      <ellipse cx="194" cy="262" rx="17" ry="15" fill="#f7b64b"/>
+      <circle cx="204" cy="224" r="10" fill="#fff"/><circle cx="182" cy="270" r="4.5" fill="#fff"/>
+      <path d="M150 232 Q190 196 232 226" fill="none" stroke="#2a1b3d" stroke-width="7"/>
+    </g>
+    <g>
+      <ellipse cx="322" cy="240" rx="40" ry="46" fill="#fbf7ff" stroke="#2a1b3d" stroke-width="5"/>
+      <ellipse cx="318" cy="244" rx="31" ry="37" fill="url(#iris)"/>
+      <ellipse cx="318" cy="262" rx="17" ry="15" fill="#f7b64b"/>
+      <circle cx="328" cy="224" r="10" fill="#fff"/><circle cx="306" cy="270" r="4.5" fill="#fff"/>
+      <path d="M280 226 Q322 196 362 232" fill="none" stroke="#2a1b3d" stroke-width="7"/>
+    </g>
+
+    <!-- nose, mouth, blush, whiskers -->
+    <polygon points="250,284 262,284 256,292" fill="#f58aa0" stroke="none"/>
+    <path d="M238 298 Q247 310 256 298 Q265 310 274 298" fill="none" stroke="#c9647a" stroke-width="3.5"/>
+    <g stroke="none" fill="#f7a8b8" opacity=".7"><ellipse cx="146" cy="296" rx="30" ry="19"/><ellipse cx="366" cy="296" rx="30" ry="19"/></g>
+    <g stroke="#e8a4a4" stroke-width="2.5" fill="none">
+      <path d="M118 280 L58 266 M120 294 L56 296 M122 308 L64 322"/>
+      <path d="M394 280 L454 266 M392 294 L456 296 M390 308 L448 322"/>
+    </g>
+  </g>
+
+  <!-- sparkles (outside the sticker) -->
+  <path d="M62 330 q4 22 22 26 q-18 4 -22 26 q-4 -22 -22 -26 q18 -4 22 -26z" fill="#fbe7a1"/>
+  <path d="M452 168 q3 14 15 17 q-12 3 -15 17 q-3 -14 -15 -17 q12 -3 15 -17z" fill="#fbe7a1"/>
+</svg>

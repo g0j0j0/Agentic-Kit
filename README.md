@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/assets/logo.svg" width="160" alt="Agentic-Kit logo: a pastel chibi calico cat sticker in a hard hat and hi-vis vest"></p>
+
 # Agentic-Kit
 
 > Reusable Claude Code skeleton: agents, skills, docs and session memory, loaded automatically at session start.
