@@ -13,6 +13,7 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 - Kit-only skills (`init-project`, `ansible-bootstrap`) and agents (`ansible-expert`) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos.
 
 ## Recent changes
+- 2026-11-16 [docs] Logo replaced by a chibi cat crew in hard hats under a neon AGENTIC-KIT sign (JPEG, 249 KB); sticker SVG removed (docs/assets/logo.jpg, README.md)
 - 2026-11-14 [docs] Project logo: pastel chibi calico cat sticker in hard hat and hi-vis vest, hand-written SVG (docs/assets/logo.svg, README.md)
 - 2026-11-14 [feat] kubernetes-engineer specialist (manifests, Helm, Kustomize, network policies, GitOps with FluxCD/ArgoCD); devops-engineer keeps Terraform, CI/CD, git (.claude/agents/, docs/agents, init-project template docs)
 - 2026-11-14 [fix] ansible-bootstrap.sh expands a leading `~` in the target path (skill passes it quoted) (.claude/skills/ansible-bootstrap/scripts/ansible-bootstrap.sh)
