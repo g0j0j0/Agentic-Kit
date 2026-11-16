@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/assets/logo.svg" width="160" alt="Agentic-Kit logo: a pastel chibi calico cat sticker in a hard hat and hi-vis vest"></p>
+<p align="center"><img src="docs/assets/logo.jpg" width="360" alt="Agentic-Kit logo: a chibi cat crew in hard hats and orange work suits under a neon AGENTIC-KIT sign"></p>
 
 # Agentic-Kit
 
