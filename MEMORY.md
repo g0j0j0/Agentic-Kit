@@ -10,9 +10,12 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 
 ## Decisions
 - Template is the single source of truth for generated repos: `.claude/skills/init-project/template/`. Kit root docs add kit-only content (`/init-project`).
-- Kit-only skills (`init-project`, `ansible-bootstrap`) and agents (`ansible-expert`) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos.
+- Kit-only skills (`init-project`) and agents (none) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos. `ansible-expert` and `ansible-bootstrap` are copied.
 
 ## Recent changes
+- 2026-11-20 [feat] ansible-expert aligned with other specialists: repo conventions first, Acceptance criteria, safety, git, report with pre-existing issues (.claude/agents/ansible-expert.md, docs/agents, template docs)
+- 2026-11-20 [feat] init-project now also copies ansible-expert and ansible-bootstrap into generated repos; only init-project stays kit-only (init-project.sh, docs/agents, docs/skills, docs/guides, template docs, GLOSSARY.md)
+- 2026-11-20 [fix] init-project.sh no longer aborts on macOS when `cp -n` finds an existing agent/skill (.claude/skills/init-project/scripts/init-project.sh)
 - 2026-11-16 [docs] Logo replaced by a chibi cat crew in hard hats under a neon AGENTIC-KIT sign (JPEG, 249 KB); sticker SVG removed (docs/assets/logo.jpg, README.md)
 - 2026-11-14 [docs] Project logo: pastel chibi calico cat sticker in hard hat and hi-vis vest, hand-written SVG (docs/assets/logo.svg, README.md)
 - 2026-11-14 [feat] kubernetes-engineer specialist (manifests, Helm, Kustomize, network policies, GitOps with FluxCD/ArgoCD); devops-engineer keeps Terraform, CI/CD, git (.claude/agents/, docs/agents, init-project template docs)

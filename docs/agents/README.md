@@ -5,7 +5,7 @@ Subagents live in `.claude/agents/<name>.md` (frontmatter: `name`, `description`
 | Agent | Purpose |
 |---|---|
 | `doc-keeper` | Syncs `docs/` and `MEMORY.md` after each change. |
-| `ansible-expert` | Writes, reviews and tests Ansible (FQCN, idempotence, role layout, `requirements.yml`, yamllint/ansible-lint, syntax-check, Molecule). Model `sonnet`; tools `Read, Edit, Write, Glob, Grep, Bash`. Preloads the `ansible-bootstrap` skill for new projects. Tooling via `uv`. Kit-only. |
+| `ansible-expert` | Writes, reviews and tests Ansible (FQCN, idempotence, role layout, `requirements.yml`, yamllint/ansible-lint, syntax-check, Molecule). Model `sonnet`; tools `Read, Edit, Write, Glob, Grep, Bash`. Preloads the `ansible-bootstrap` skill for new projects. Tooling via `uv` by default, repo tooling first. In existing repos it follows their layout and conventions, works against the Spec's Acceptance criteria, validates only (`--syntax-check`/`--check`), and reports pre-existing issues instead of fixing them. Copied into generated repos. |
 | `manager` | Gathers a Requester's needs, writes User stories and Acceptance criteria, delegates to Specialists, then QA and security review. Run with `claude --agent manager` (subagents cannot spawn subagents). Model `opus`. |
 | `devops-engineer` | Specialist for Terraform/OpenTofu, CI/CD and git. Validates and plans only. |
 | `kubernetes-engineer` | Specialist for Kubernetes manifests, Helm, Kustomize, network policies, RBAC, workload security and GitOps (FluxCD, ArgoCD). Validates and renders only; never applies to a cluster. |
@@ -16,9 +16,9 @@ Subagents cannot answer permission prompts. Pre-allow the commands Specialists a
 
 The `manager` records User stories with `docs/agents/issue-tracker.md`, created per repo by `/setup-matt-pocock-skills`. Without it, the manager asks the Requester where to record them.
 
-Kit-only agents are listed in `KIT_ONLY_AGENTS` in `.claude/skills/init-project/scripts/init-project.sh` and not copied to generated repos.
+All agents are copied to generated repos except those listed in `KIT_ONLY_AGENTS` in `.claude/skills/init-project/scripts/init-project.sh` (currently none).
 
-To use a kit-only agent in another repo, install it at user level: see [Guides](../guides/README.md#use-ansible-expert-and-ansible-bootstrap-from-any-repo).
+To use `ansible-expert` in an existing repo, install it at user level: see [Guides](../guides/README.md#use-ansible-expert-and-ansible-bootstrap-from-any-repo).
 
 ## Agent skills config
 

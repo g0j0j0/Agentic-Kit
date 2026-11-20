@@ -17,7 +17,7 @@ A repository produced from the Template by `/init-project`.
 _Avoid_: Child repo, new project
 
 **Kit-only**:
-Describes a skill or agent that is never copied to a Generated repo, as set by `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS`. Using one elsewhere is a separate, deliberate user-level install.
+Describes a skill or agent that is never copied to a Generated repo, as set by `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` (currently only `init-project`). Using one elsewhere is a separate, deliberate user-level install.
 _Avoid_: Internal, private
 
 **Skill**:
