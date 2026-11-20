@@ -11,7 +11,7 @@ ln -s "$PWD/.claude/skills/init-project" ~/.claude/skills/init-project
 ```
 
 ## Use ansible-expert and /ansible-bootstrap from any repo
-Both are kit-only, so install them at user level (run from the kit root):
+New repos from `/init-project` already include both. For an existing repo, install them at user level (run from the kit root):
 ```bash
 mkdir -p ~/.claude/agents
 ln -s "$PWD/.claude/agents/ansible-expert.md" ~/.claude/agents/ansible-expert.md

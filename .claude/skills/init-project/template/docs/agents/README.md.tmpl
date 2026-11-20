@@ -5,6 +5,7 @@ Subagents live in `.claude/agents/<name>.md` (frontmatter: `name`, `description`
 | Agent | Purpose |
 |---|---|
 | `doc-keeper` | Syncs `docs/` and `MEMORY.md` after each change. |
+| `ansible-expert` | Writes, reviews and tests Ansible (FQCN, idempotence, role layout, `requirements.yml`, yamllint/ansible-lint, syntax-check, Molecule). Model `sonnet`. Preloads the `ansible-bootstrap` skill for new projects. Tooling via `uv` by default, repo tooling first. In existing repos it follows their layout and conventions, works against the Spec's Acceptance criteria, validates only (`--syntax-check`/`--check`), and reports pre-existing issues instead of fixing them. |
 | `manager` | Gathers a Requester's needs, writes User stories and Acceptance criteria, delegates to Specialists, then QA and security review. Run with `claude --agent manager` (subagents cannot spawn subagents). Model `opus`. |
 | `devops-engineer` | Specialist for Terraform/OpenTofu, CI/CD and git. Validates and plans only. |
 | `kubernetes-engineer` | Specialist for Kubernetes manifests, Helm, Kustomize, network policies, RBAC, workload security and GitOps (FluxCD, ArgoCD). Validates and renders only; never applies to a cluster. |

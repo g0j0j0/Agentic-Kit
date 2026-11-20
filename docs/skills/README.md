@@ -5,11 +5,11 @@ Skills live in `.claude/skills/<name>/SKILL.md` and are invoked as `/<name>`.
 | Skill | Usage | Purpose |
 |---|---|---|
 | `init-project` | `/init-project <dir> [name]` | Scaffolds a repo with this structure. Template: `.claude/skills/init-project/template/` (`*.tmpl`, `dot-` → `.`). Kit-only: not copied into generated repos. |
-| `ansible-bootstrap` | `/ansible-bootstrap <dir>` | Scaffolds a hardened Ansible project (Debian/Ubuntu + RHEL 9): `common`, `users`, `ssh`, `firewall`, `fail2ban` roles, vault, lint config. Template: `.claude/skills/ansible-bootstrap/template/` (`dot-` → `.`, never overwrites). Kit-only. |
+| `ansible-bootstrap` | `/ansible-bootstrap <dir>` | Scaffolds a hardened Ansible project (Debian/Ubuntu + RHEL 9): `common`, `users`, `ssh`, `firewall`, `fail2ban` roles, vault, lint config. Template: `.claude/skills/ansible-bootstrap/template/` (`dot-` → `.`, never overwrites). Copied into generated repos. |
 
 `ansible-bootstrap` is preloaded by the `ansible-expert` agent (`skills:` frontmatter).
 
-Kit-only skills are listed in `KIT_ONLY_SKILLS` in `.claude/skills/init-project/scripts/init-project.sh`.
+`init-project` is the only kit-only skill: it is listed in `KIT_ONLY_SKILLS` in `.claude/skills/init-project/scripts/init-project.sh` and not copied to generated repos.
 
 ## `/ansible-bootstrap`
 - Lockout safety: `users` runs before `ssh` (admin key asserted), sshd config is validated with `sshd -t` and reloaded, SSH is allowed before the firewall goes default-deny. On socket-activated sshd (Ubuntu 22.10+), a handler restarts `ssh.socket` when `ssh_port` changes.
