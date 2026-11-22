@@ -5,7 +5,7 @@ Subagents live in `.claude/agents/<name>.md` (frontmatter: `name`, `description`
 | Agent | Purpose |
 |---|---|
 | `doc-keeper` | Syncs `docs/` and `MEMORY.md` after each change. |
-| `ansible-expert` | Writes, reviews and tests Ansible (FQCN, idempotence, role layout, `requirements.yml`, yamllint/ansible-lint, syntax-check, Molecule). Model `sonnet`; tools `Read, Edit, Write, Glob, Grep, Bash`. Preloads the `ansible-bootstrap` skill for new projects. Tooling via `uv` by default, repo tooling first. In existing repos it follows their layout and conventions, works against the Spec's Acceptance criteria, validates only (`--syntax-check`/`--check`), and reports pre-existing issues instead of fixing them. Copied into generated repos. |
+| `ansible-expert` | Writes, reviews and tests Ansible (FQCN, idempotence, role layout, `requirements.yml`, yamllint/ansible-lint, syntax-check, Molecule). Model `sonnet`; tools `Read, Edit, Write, Glob, Grep, Bash, Skill`. Preloads the `ansible-bootstrap` skill for new projects. Tooling via `uv` by default, repo tooling first. In existing repos it follows their layout and conventions, works against the Spec's Acceptance criteria, validates only (`--syntax-check`/`--check`), and reports pre-existing issues instead of fixing them. Copied into generated repos. |
 | `manager` | Gathers a Requester's needs, writes User stories and Acceptance criteria, delegates to Specialists, then QA and security review. Run with `claude --agent manager` (subagents cannot spawn subagents). Model `opus`. |
 | `devops-engineer` | Specialist for Terraform/OpenTofu, CI/CD and git. Validates and plans only. |
 | `kubernetes-engineer` | Specialist for Kubernetes manifests, Helm, Kustomize, network policies, RBAC, workload security and GitOps (FluxCD, ArgoCD). Validates and renders only; never applies to a cluster. |
@@ -13,6 +13,8 @@ Subagents live in `.claude/agents/<name>.md` (frontmatter: `name`, `description`
 | `security-reviewer` | Read-only security audit (misconfigurations, secrets, encryption, CIS/ISO references) matched to the technologies used. |
 
 Subagents cannot answer permission prompts. Pre-allow the commands Specialists and reviewers need (for example `git`, `uvx`, `yamllint`) in `.claude/settings.json` under `permissions.allow`, or their work is blocked.
+
+The Specialists that write code (`ansible-expert`, `devops-engineer`, `kubernetes-engineer`) and `security-reviewer` have the `Skill` tool. Specialists call the `tdd` skill for logic with testable behaviour (filter plugins, scripts, parsers) and treat declarative config as validate-only; `security-reviewer` may call `security-review` and stays read-only. `tdd` and `security-review` come from the user's installed skills; the kit does not ship them. `qa-reviewer`, `doc-keeper` and `manager` do not have `Skill`: `code-review` spawns sub-agents, which `qa-reviewer` cannot do.
 
 The `manager` records User stories with `docs/agents/issue-tracker.md`, created per repo by `/setup-matt-pocock-skills`. Without it, the manager asks the Requester where to record them.
 
