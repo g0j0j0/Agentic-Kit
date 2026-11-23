@@ -13,6 +13,7 @@ Newest first. Max 30 recent entries; archive older ones to docs/CHANGELOG.md. --
 - Kit-only skills (`init-project`) and agents (none) are listed in `KIT_ONLY_SKILLS` / `KIT_ONLY_AGENTS` in init-project.sh and never copied to generated repos. `ansible-expert` and `ansible-bootstrap` are copied.
 
 ## Recent changes
+- 2026-11-23 [docs] Guide: install gitleaks, shellcheck, trivy, checkov for security-reviewer on macOS and Linux (docs/guides/README.md, init-project template docs)
 - 2026-11-22 [feat] ansible-expert, devops-engineer, kubernetes-engineer and security-reviewer get the `Skill` tool; Specialists call `tdd` for testable logic, security-reviewer may call `security-review` (.claude/agents/, docs/agents, template docs)
 - 2026-11-20 [feat] ansible-expert aligned with other specialists: repo conventions first, Acceptance criteria, safety, git, report with pre-existing issues (.claude/agents/ansible-expert.md, docs/agents, template docs)
 - 2026-11-20 [feat] init-project now also copies ansible-expert and ansible-bootstrap into generated repos; only init-project stays kit-only (init-project.sh, docs/agents, docs/skills, docs/guides, template docs, GLOSSARY.md)
