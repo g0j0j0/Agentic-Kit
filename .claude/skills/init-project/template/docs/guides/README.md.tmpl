@@ -5,5 +5,21 @@
 2. Make a change.
 3. Run the `doc-keeper` agent (or update `docs/` and `MEMORY.md` manually).
 
+## Install the security-reviewer scanners
+`security-reviewer` runs these tools when they are installed: `gitleaks`, `shellcheck`, `trivy`, `checkov`. Without them it falls back to manual review.
+
+| Tool | macOS | Debian/Ubuntu | RHEL/Fedora/Rocky |
+|---|---|---|---|
+| `checkov` | `uv tool install checkov` | same | same |
+| `shellcheck` | `brew install shellcheck` | `apt install shellcheck` | `dnf install ShellCheck` (EPEL on RHEL/Rocky) |
+| `gitleaks` | `brew install gitleaks` | release binary (not in default apt) | release binary (not in default dnf) |
+| `trivy` | `brew install trivy` | Aqua apt repo, or release binary | Aqua rpm repo, or release binary |
+
+- Release binaries: download the archive for your OS and arch from the project's GitHub releases (`gitleaks/gitleaks`, `aquasecurity/trivy`), verify its checksum, and put the binary in `~/.local/bin` or `/usr/local/bin`.
+- Homebrew on Linux also works for all three non-Python tools.
+- Check each install page before use; package names and repos change.
+- Subagents cannot answer permission prompts: pre-allow these commands in `.claude/settings.json`.
+- Verify: `gitleaks version && shellcheck --version && trivy --version && checkov --version`.
+
 ## Add an agent or skill
 Create the file, then list it in `docs/agents/` or `docs/skills/`.
